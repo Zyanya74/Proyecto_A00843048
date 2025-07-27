@@ -2,31 +2,33 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+using namespace std;
 
-Arquero::Arquero() : Unidad(), flechas(10) {}
+Arquero::Arquero() : Unidad("Arquero", 80, 15, 1), precision(0.8f) {}
 
-Arquero::Arquero(int vidaMax, int atk, int lvl, int flechasInicial)
-    : Unidad(vidaMax, atk, lvl), flechas(flechasInicial) {}
+Arquero::Arquero(int vida, int ataque, int nivel, float precision)
+    : Unidad("Arquero", vida, ataque, nivel), precision(precision) {}
 
-int Arquero::getFlechas() const { return flechas; }
+float Arquero::getPrecision() const { return precision; }
+void Arquero::setPrecision(float p) { precision = p; }
 
-void Arquero::setFlechas(int f) { flechas = f; }
-
-void Arquero::disparar(Unidad& objetivo) {
-    if (flechas <= 0) {
-        std::cout << "🏹 No hay flechas para disparar." << std::endl;
-        return;
-    }
-
-    std::srand(std::time(0));
-    int daño = (getAtaque() / 2) + rand() % (getAtaque() / 2 + 1);
-    std::cout << "🏹 Flecha lanzada con " << daño << " puntos de daño." << std::endl;
-
-    objetivo.recibeAtaque(daño);
-    flechas--;
-}
-
-void Arquero::imprimir() const {
+void Arquero::imprimir() {
     Unidad::imprimir();
-    std::cout << "Flechas      : " << flechas << std::endl;
+    cout << "Precisión: " << precision * 100 << "%" << endl;
 }
+
+void Arquero::atacar(Unidad& objetivo) {
+    std::srand(std::time(nullptr));
+    int minAtk = getAtaque() / 2;
+    int maxAtk = getAtaque();
+    if (objetivo.getNivel() > getNivel()) maxAtk = minAtk;
+    int ptosAtk = rand() % (maxAtk - minAtk + 1) + minAtk;
+    float chance = static_cast<float>(rand()) / RAND_MAX;
+    if (chance < precision) {
+        ptosAtk += getAtaque() * 0.5;
+        cout << "Tiro crítico!\n";
+    }
+    cout << getNombre() << " ataca a " << objetivo.getNombre() << " causando " << ptosAtk << " puntos de daño.\n";
+    objetivo.recibeAtaque(ptosAtk);
+}
+

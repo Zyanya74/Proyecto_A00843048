@@ -3,15 +3,15 @@
 
 class Arquero : public Unidad {
 private:
-    int flechas;
+    float precision;
 
 public:
     Arquero();
-    Arquero(int vidaMax, int atk, int lvl, int flechasInicial);
+    Arquero(int vida, int ataque, int nivel, float precision);
 
-    int getFlechas() const;
-    void setFlechas(int f);
+    float getPrecision() const;
+    void setPrecision(float p);
 
-    void disparar(Unidad& objetivo);
-    void imprimir() const override;
+    void imprimir() override;
+    void atacar(Unidad& objetivo) override;
 };
