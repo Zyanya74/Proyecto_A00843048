@@ -1,34 +1,21 @@
 #include "Arquero.hpp"
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
-using namespace std;
 
-Arquero::Arquero() : Unidad("Arquero", 80, 15, 1), precision(0.8f) {}
+Arquero::Arquero(string n, int v, int a, int lvl, float p) : Unidad(n, v, a, lvl), precision(p) {}
 
-Arquero::Arquero(int vida, int ataque, int nivel, float precision)
-    : Unidad("Arquero", vida, ataque, nivel), precision(precision) {}
-
-float Arquero::getPrecision() const { return precision; }
-void Arquero::setPrecision(float p) { precision = p; }
-
-void Arquero::imprimir() {
-    Unidad::imprimir();
-    cout << "Precisión: " << precision * 100 << "%" << endl;
+void Arquero::imprimir() const {
+    cout << "Arquero " << nombre << " (Vida: " << vidaActual << "/" << vidaMax << ", Ataque: " << ataque << ", Nivel: " << nivel << ", Precisión: " << precision << ")" << endl;
 }
 
-void Arquero::atacar(Unidad& objetivo) {
-    std::srand(std::time(nullptr));
-    int minAtk = getAtaque() / 2;
-    int maxAtk = getAtaque();
-    if (objetivo.getNivel() > getNivel()) maxAtk = minAtk;
-    int ptosAtk = rand() % (maxAtk - minAtk + 1) + minAtk;
+void Arquero::atacar(Unidad* objetivo) {
     float chance = static_cast<float>(rand()) / RAND_MAX;
-    if (chance < precision) {
-        ptosAtk += getAtaque() * 0.5;
-        cout << "Tiro crítico!\n";
+    if (chance <= precision) {
+        int danio = ataque;
+        cout << nombre << " acierta y hace " << danio << " de daño!" << endl;
+        objetivo->recibirDanio(danio);
+    } else {
+        cout << nombre << " falla su disparo!" << endl;
     }
-    cout << getNombre() << " ataca a " << objetivo.getNombre() << " causando " << ptosAtk << " puntos de daño.\n";
-    objetivo.recibeAtaque(ptosAtk);
 }
 

@@ -1,0 +1,5 @@
+Arquero Robin 85 18 6 0.75
+Guerrero Ares 120 35 4 15
+Mago Loki 70 30 3 40
+Guerrero Achilles 105 33 4 14
+Mago DrStrange 78 26 5 55

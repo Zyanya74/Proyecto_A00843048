@@ -2,17 +2,10 @@
 #include "Unidad.hpp"
 
 class Guerrero : public Unidad {
-private:
     int fuerza;
 
 public:
-    Guerrero();
-    Guerrero(int vida, int ataque, int nivel, int fuerza);
-
-    int getFuerza() const;
-    void setFuerza(int f);
-
-    void imprimir() override;
-    void recibeAtaque(int ptosAtaque) override;
-    void atacar(Unidad& objetivo) override;
+    Guerrero(string, int, int, int, int);
+    void imprimir() const override;
+    void atacar(Unidad* objetivo) override;
 };

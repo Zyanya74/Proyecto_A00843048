@@ -1,60 +1,33 @@
 # Proyecto_A00843048
+# Simulación de Combate
+
+```mermaid
 classDiagram
     class Unidad {
-        - string nombre
-        - int vida
-        - int salud
-        - int ataque
-        - int nivel
-        + Unidad()
-        + Unidad(nombre, vida, ataque, nivel)
-        + string getNombre()
-        + int getVida()
-        + int getSalud()
-        + int getAtaque()
-        + int getNivel()
-        + void setNombre(nombre)
-        + void setVida(vida)
-        + void setSalud(salud)
-        + void setAtaque(ataque)
-        + void setNivel(nivel)
-        + int porcentajeSalud()
-        + void imprimeBarra()
-        + virtual void imprimir()
-        + virtual void recibeAtaque(int)
-        + virtual void atacar(Unidad&)
+        - nombre: string
+        - vidaMax: int
+        - vidaActual: int
+        - ataque: int
+        - nivel: int
+        + recibirDanio(int): void
+        + estaVivo(): bool
+        + atacar(Unidad*): void
+        + imprimir(): void
     }
 
     class Guerrero {
-        - int fuerza
-        + Guerrero()
-        + Guerrero(vida, ataque, nivel, fuerza)
-        + int getFuerza()
-        + void setFuerza(fuerza)
-        + void imprimir()
-        + void recibeAtaque(int)
-        + void atacar(Unidad&)
+        - fuerza: int
+        + imprimir(): void
     }
 
     class Arquero {
-        - float precision
-        + Arquero()
-        + Arquero(vida, ataque, nivel, precision)
-        + float getPrecision()
-        + void setPrecision(precision)
-        + void imprimir()
-        + void atacar(Unidad&)
+        - precision: float
+        + imprimir(): void
     }
 
     class Mago {
-        - int mana
-        + Mago()
-        + Mago(vida, ataque, nivel, mana)
-        + int getMana()
-        + void setMana(mana)
-        + void imprimir()
-        + void recibeAtaque(int)
-        + void atacar(Unidad&)
+        - mana: int
+        + imprimir(): void
     }
 
     Unidad <|-- Guerrero

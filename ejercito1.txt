@@ -1,0 +1,5 @@
+Guerrero Thor 100 30 5 10
+Mago Merlin 80 25 4 50
+Arquero Legolas 90 20 6 0.8
+Guerrero Conan 110 28 3 12
+Mago Gandalf 85 22 5 60
